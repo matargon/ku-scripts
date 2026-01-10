@@ -64,7 +64,6 @@ run_server() {
         successes+=("$srv")
     else
         color_red "script failed $srv"
-        cat "$tmp_log"
         failures+=("$srv")
         printf '%s\n' "$srv" >> "$failed_ips_file"
     fi
