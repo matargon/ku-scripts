@@ -100,7 +100,7 @@ failures=()
 local_ips=()
 total_targets=0
 total_start_ts=$(date +%s)
-log_file="run_all_servers.log"
+log_file="all_servers.log"
 failed_ips_file="failed_ips.txt"
 
 load_local_ips
