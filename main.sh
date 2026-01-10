@@ -107,9 +107,10 @@ load_local_ips
 : > "$failed_ips_file"
 total_targets=$(awk 'NF{c++} END{print c+0}' servers.txt)
 printf 'total to run: %s\n' "$total_targets"
-while IFS= read -r srv; do
+mapfile -t servers < servers.txt
+for srv in "${servers[@]}"; do
     [ -n "$srv" ] && run_server "$srv"
-done < servers.txt
+done
 wait
 total_end_ts=$(date +%s)
 total_duration=$((total_end_ts - total_start_ts))
