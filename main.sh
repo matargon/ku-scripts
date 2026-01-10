@@ -69,6 +69,7 @@ run_server() {
     fi
     rm -f "$tmp_log"
     log_line_blue "===== $srv end $end_time_str status=$status duration=${duration}s ====="
+    printf '\n' >> "$log_file"
     printf 'finished at: %s\n' "$end_time_str"
     printf 'duration: %ss\n' "$duration"
 }
