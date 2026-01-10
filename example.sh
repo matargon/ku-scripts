@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 USER=S (whoani)
-ssh -1 /root/.ssh/id _ed25519 SUSER@$1 'mkdir /home/student/Desktop/try'
-#rsync -avz -e "ssh -i /root/.ssh/id_ed25519" /opt/backup/student/ $USER@$srv:/opt/backup/student
-# echo "something went wrong* >&2
-# exit 1
+SRV=$1
+# ssh -1 /root/.ssh/id _ed25519 SUSER@$SRV 'mkdir /home/student/Desktop/try'
+# rsync -av -e "ssh -i /root/.ssh/id_ed25519" /home/student/Desktop/try2 $USER@$SRV:/home/student/Desktop/
+# rsync -av /home/student/Desktop/try2 $USER@$SRV:/home/student/Desktop/
