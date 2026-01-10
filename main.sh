@@ -95,7 +95,6 @@ print_summary() {
 #
 # Main
 #
-USER=$(whoami)
 successes=()
 failures=()
 local_ips=()
