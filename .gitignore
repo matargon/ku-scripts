@@ -1,0 +1,3 @@
+*.log
+failed_ips.txt
+run_on_server.sh
