@@ -17,7 +17,7 @@ log_line_blue() {
 load_local_ips() {
     while IFS= read -r ip; do
         [ -n "$ip" ] && local_ips+=("$ip")
-    done < <(ifconfig | awk '/inet /{print $2}')
+    done < <(ip -4 -o addr show | awk '{print $4}' | cut -d/ -f1)
 }
 
 is_local_ip() {
