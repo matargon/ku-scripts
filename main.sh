@@ -53,6 +53,7 @@ run_server() {
     start_time_str=$(date '+%Y-%m-%d %H:%M:%S')
     tmp_log="$(mktemp)"
     log_line_blue "===== $srv start $start_time_str ====="
+    # code this file!
     ./run_on_server.sh "$srv" 2>&1 | tee "$tmp_log" | tee -a "$log_file"
     status=${PIPESTATUS[0]}
     end_ts=$(date +%s)
