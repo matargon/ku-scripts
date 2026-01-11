@@ -42,9 +42,12 @@ color_blue "fetching csv from $SERVER_HOST"
 
 run_ts=$(date '+%Y-%m-%d_%H-%M-%S')
 remote_log_dir="$SERVER_LOG_ROOT/$LOCAL_IP"
-remote_log_file="${LOCAL_IP}_${run_ts}.log"
+remote_log_file=""
+had_run=0
+had_fail=0
 
 color_blue "processing csv for local ip $LOCAL_IP"
+printf 'run start: %s ip=%s\n' "$run_ts" "$LOCAL_IP" >> "$tmp_log"
 while IFS=, read -r ip src dst; do
     ip=$(trim "$ip")
     src=$(trim "$src")
@@ -65,14 +68,26 @@ while IFS=, read -r ip src dst; do
     fi
 
     printf 'rsync %s -> %s\n' "$src" "$dst" >> "$tmp_log"
-    rsync $RSYNC_FLAGS "$SERVER_USER@$SERVER_HOST:$src" "$dst" 2>&1 | tee -a "$tmp_log"
-    status=${PIPESTATUS[0]}
+    had_run=1
+    rsync $RSYNC_FLAGS "$SERVER_USER@$SERVER_HOST:$src" "$dst"
+    status=$?
     if [ $status -eq 0 ]; then
         printf 'ok: %s\n' "$src" >> "$tmp_log"
     else
+        had_fail=1
         printf 'fail: %s (status=%s)\n' "$src" "$status" >> "$tmp_log"
     fi
 done < "$tmp_csv"
+
+if [ $had_run -eq 0 ]; then
+    run_status="skipped"
+elif [ $had_fail -eq 0 ]; then
+    run_status="success"
+else
+    run_status="failed"
+fi
+printf 'run status: %s\n' "$run_status" >> "$tmp_log"
+remote_log_file="${LOCAL_IP}_${run_ts}_${run_status}.log"
 
 color_blue "sending log to server"
 "${ssh_cmd[@]}" "$SERVER_USER@$SERVER_HOST" "mkdir -p \"$remote_log_dir\""
