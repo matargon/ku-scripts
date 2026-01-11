@@ -64,8 +64,8 @@ while IFS=, read -r ip src dst; do
     fi
 
     printf 'rsync %s -> %s\n' "$src" "$dst" >> "$tmp_log"
-    rsync -va --progress --delete --update --dry-run "$SERVER_USER@$SERVER_HOST:$src" "$dst" >> "$tmp_log" 2>&1
-    status=$?
+    rsync -va --progress --delete --update --dry-run "$SERVER_USER@$SERVER_HOST:$src" "$dst" 2>&1 | tee -a "$tmp_log"
+    status=${PIPESTATUS[0]}
     if [ $status -eq 0 ]; then
         printf 'ok: %s\n' "$src" >> "$tmp_log"
     else
