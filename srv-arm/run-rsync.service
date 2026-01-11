@@ -2,6 +2,6 @@
 Description=Синхронизация профиля student с сервера
 After=network-online.target
 [Service]
-ExecStart=/etc/cod-os/run-sync.sh
+ExecStart=/etc/cod-os/run-rsync.sh
 [Install]
 WantedBy=multi-user.target
