@@ -41,7 +41,7 @@ color_blue "fetching csv from $SERVER_HOST"
 "${scp_cmd[@]}" "$SERVER_USER@$SERVER_HOST:$SERVER_CSV_PATH" "$tmp_csv"
 
 run_ts=$(date '+%Y-%m-%d_%H-%M-%S')
-remote_log_dir="$SERVER_LOG_ROOT/$LOCAL_IP"
+remote_log_dir="$SERVER_LOG_ROOT/logs"
 remote_log_file=""
 had_run=0
 had_fail=0
