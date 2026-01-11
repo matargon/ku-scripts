@@ -6,6 +6,7 @@ SERVER_HOST="srv.kod-u.ru"
 SERVER_CSV_PATH="/home/ku/ku-sync/laptop-symc.csv"
 SERVER_LOG_ROOT="/home/ku/ku-sync/"
 # SSH_KEY="/path/to/key"
+RSYNC_FLAGS="-va --progress --delete --update --dry-run"
 
 color_blue() { printf '\033[0;34m%s\033[0m\n' "$1"; }
 color_green() { printf '\033[0;32m%s\033[0m\n' "$1"; }
@@ -64,7 +65,7 @@ while IFS=, read -r ip src dst; do
     fi
 
     printf 'rsync %s -> %s\n' "$src" "$dst" >> "$tmp_log"
-    rsync -va --progress --delete --update --dry-run "$SERVER_USER@$SERVER_HOST:$src" "$dst" 2>&1 | tee -a "$tmp_log"
+    rsync $RSYNC_FLAGS "$SERVER_USER@$SERVER_HOST:$src" "$dst" 2>&1 | tee -a "$tmp_log"
     status=${PIPESTATUS[0]}
     if [ $status -eq 0 ]; then
         printf 'ok: %s\n' "$src" >> "$tmp_log"
