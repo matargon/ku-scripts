@@ -3,8 +3,8 @@
 # Placeholder config: fill these in.
 SERVER_USER="ku"
 SERVER_HOST="srv.kod-u.ru"
-SERVER_CSV_PATH="/home/ku/ku-sync/laptop-symc.csv"
-SERVER_LOG_ROOT="/home/ku/ku-sync/"
+SERVER_CSV_PATH="/var/arm-u/ku-sync/laptop-symc.csv"
+SERVER_LOG_ROOT="/var/arm-u/ku-sync/"
 # SSH_KEY="/path/to/key"
 RSYNC_FLAGS="-va --progress --delete --update --dry-run"
 
