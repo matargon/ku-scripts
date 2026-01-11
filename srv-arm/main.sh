@@ -4,7 +4,7 @@
 SERVER_USER="ku"
 SERVER_HOST="srv.kod-u.ru"
 SERVER_CSV_PATH="/home/ku/ku-sync/laptop-symc.csv"
-SERVER_LOG_ROOT="/path/to/logs"
+SERVER_LOG_ROOT="/home/ku/ku-sync/"
 # SSH_KEY="/path/to/key"
 
 color_blue() { printf '\033[0;34m%s\033[0m\n' "$1"; }
