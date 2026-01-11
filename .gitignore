@@ -2,3 +2,7 @@
 failed_ips.txt
 run_on_server.sh
 servers.txt
+arm-arm/*.log
+arm-arm/failed_ips.txt
+arm-arm/run_on_server.sh
+arm-arm/servers.txt
