@@ -5,8 +5,7 @@ SERVER_USER="ku"
 SERVER_HOST="srv.kod-u.ru"
 SERVER_CSV_PATH="/var/arm-u/ku-sync/laptop-sync.csv"
 SERVER_LOG_ROOT="/var/arm-u/ku-sync/"
-# SSH_KEY="/path/to/key"
-RSYNC_FLAGS="-va --progress --delete --update --dry-run"
+RSYNC_FLAGS="-va --progress --delete --update"
 
 color_blue() { printf '\033[0;34m%s\033[0m\n' "$1"; }
 color_green() { printf '\033[0;32m%s\033[0m\n' "$1"; }
@@ -30,12 +29,6 @@ tmp_log="$(mktemp)"
 
 scp_cmd=(scp)
 ssh_cmd=(ssh)
-# rsync_ssh="ssh"
-# if [ -n "$SSH_KEY" ]; then
-    # scp_cmd+=(-i "$SSH_KEY")
-    # ssh_cmd+=(-i "$SSH_KEY")
-    # rsync_ssh="ssh -i $SSH_KEY"
-# fi
 
 color_blue "fetching csv from $SERVER_HOST"
 "${scp_cmd[@]}" "$SERVER_USER@$SERVER_HOST:$SERVER_CSV_PATH" "$tmp_csv"
