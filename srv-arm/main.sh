@@ -49,10 +49,12 @@ while IFS=, read -r ip src dst; do
     src=$(trim "$src")
     dst=$(trim "$dst")
 
+    printf 'row: ip=%s src=%s dst=%s\n' "$ip" "$src" "$dst" >> "$tmp_log"
     [ -z "$ip" ] && continue
     [ "${ip#\#}" != "$ip" ] && continue
 
     if [ "$ip" != "$LOCAL_IP" ]; then
+        printf 'skip: ip mismatch (local=%s)\n' "$LOCAL_IP" >> "$tmp_log"
         continue
     fi
 
